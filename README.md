@@ -51,12 +51,12 @@
 
 | Column                | Type       | Options                        |
 | --------------------- | ---------- | -------------------------------|
-| post_code             | integer    | null: false                    |
+| post_code             | string     | null: false                    |
 | prefecture_id         | integer    | null: false                    |
 | city                  | string     | null: false                    |
 | block                 | string     | null: false                    |
 | building              | string     |                                |
-| phone_number          | integer    | null: false                    |
+| phone_number          | string     | null: false                    |
 | user_item             | references | null: false, foreign_key: true |
 
 # belongs_to :user_item
