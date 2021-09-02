@@ -1,24 +1,66 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | -------------------------------|
+| nickname              | string     | null: false                    |
+| email                 | string     | null: false                    |
+| encrypted_password    | string     | null: false                    |
+| last_name             | string     | null: false                    |
+| first_name            | string     | null: false                    |
+| last_name_kana        | string     | null: false                    |
+| first_name_kana       | string     | null: false                    |
+| year_birth_at         | string     | null: false                    |
+| month_birth_at        | string     | null: false                    |
+| day_birth_at          | string     | null: false                    |
 
-* Ruby version
+# has_many :items
+# has_one :creditCard
+# has_one :address
 
-* System dependencies
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | -------------------------------|
+| name                  | string     | null: false                    |
+| text                  | text       | null: false                    |
+| category              | string     | null: false                    |
+| status                | string     | null: false                    |
+| fee                   | string     | null: false                    |
+| delivery_from         | string     | null: false                    |
+| delivery_days         | string     | null: false                    |
+| price                 | integer    | null: false                    |
+| user_id               | references | null: false, foreign_key: true |
 
-* Database initialization
+# belongs_to :user
+# has_one :creditCard
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## creditCardsテーブル
 
-* Deployment instructions
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | -------------------------------|
+| user_id               | references | null: false, foreign_key: true |
+| customer_id           | string     | null: false                    |
+| card_id               | string     | null: false                    |
 
-* ...
+# belongs_to :user
+# belongs_to :item
+# has_one :address
+
+
+## addressesテーブル
+
+| Column                | Type       | Options                        |
+| --------------------- | ---------- | -------------------------------|
+| post_code             | integer    | null: false                    |
+| prefecture            | string     | null: false                    |
+| city                  | string     | null: false                    |
+| block                 | string     | null: false                    |
+| building              | string     | null: false                    |
+| phone_number          | integer    | null: false                    |
+
+# belongs_to :user
+# belongs_to :creditCards
