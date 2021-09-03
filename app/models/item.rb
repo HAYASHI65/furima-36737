@@ -7,5 +7,15 @@ class Item < ApplicationRecord
   belongs_to :delivery_days
   has_one_attached :image
 
-  validates :category_id, numericality:{ other_than: 1, message: "cant't be blank"}
+  
+  with_options presence:true do
+    validates :name
+    validates :text
+    validates :category_id, numericality:{ other_than: 1, message: "cant't be blank"}
+    validates :status_id
+    validates :fee_id
+    validates :prefecture_id
+    validates :delivery_days_id
+    validates :price, format: { with: /\A[0-9]+\z/}
+  end 
 end
