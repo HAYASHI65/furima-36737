@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :fee
   belongs_to :prefecture
   belongs_to :delivery_days
+  has_one_attached :image
 
   validates :category_id, numericality:{ other_than: 1, message: "cant't be blank"}
 end
