@@ -9,14 +9,15 @@ class Item < ApplicationRecord
 
   
   with_options presence:true do
+    validates :image
     validates :name
     validates :text
-    validates :category_id, numericality:{ other_than: 1, message: "cant't be blank"}
-    validates :status_id
-    validates :fee_id
-    validates :prefecture_id
-    validates :delivery_days_id
+    validates :category_id, numericality:{ other_than: 1, message: "can't be blank"}
+    validates :status_id, numericality:{ other_than: 1, message: "can't be blank"}
+    validates :fee_id, numericality:{ other_than: 1, message: "can't be blank"}
+    validates :prefecture_id, numericality:{ other_than: 1, message: "can't be blank"}
+    validates :delivery_days_id, numericality:{ other_than: 1, message: "can't be blank"}
     validates :price, format: { with: /\A[0-9]+\z/}
   end 
-  validates_inclusion_of :price, in:300..9999999
+  validates_inclusion_of :price, {in:300..9999999, message: "is out of setting range"}
 end
