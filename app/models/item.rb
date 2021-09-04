@@ -18,4 +18,5 @@ class Item < ApplicationRecord
     validates :delivery_days_id
     validates :price, format: { with: /\A[0-9]+\z/}
   end 
+  validates_inclusion_of :price, in:300..9999999
 end
