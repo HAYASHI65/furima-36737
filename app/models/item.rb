@@ -5,8 +5,8 @@ class Item < ApplicationRecord
   belongs_to :fee
   belongs_to :prefecture
   belongs_to :delivery_days
+  belongs_to :user
   has_one_attached :image
-
   
   with_options presence:true do
     validates :image
@@ -17,7 +17,7 @@ class Item < ApplicationRecord
     validates :fee_id, numericality:{ other_than: 1, message: "can't be blank"}
     validates :prefecture_id, numericality:{ other_than: 1, message: "can't be blank"}
     validates :delivery_days_id, numericality:{ other_than: 1, message: "can't be blank"}
-    validates :price, format: { with: /\A[0-9]+\z/}
+    validates :price, format: { with: /\A[0-9]+\z/, message: "is invalid. Input half-width characters"}
   end 
   validates_inclusion_of :price, {in:300..9999999, message: "is out of setting range"}
 end
