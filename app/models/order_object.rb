@@ -1,6 +1,6 @@
 class OrderObject
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :block, :building, :phone_number
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :city, :block, :building, :phone_number, :token,:price
 
   with_options presence: true do
     validates :user_id
@@ -9,7 +9,8 @@ class OrderObject
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :block
-    validates :phone_number, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width characters' }
+    validates :phone_number, format: { with: /\A[0-9]{10,11}+\z/, message: 'is invalid. Input half-width characters' }
+    validates :token
   end
 
   def save
