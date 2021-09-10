@@ -1,7 +1,6 @@
 class OrdersController < ApplicationController
-
-before_action :authenticate_user!
-before_action :move_to_index
+  before_action :authenticate_user!
+  before_action :move_to_index
 
   def index
     @item = Item.find(params[:item_id])
@@ -21,12 +20,15 @@ before_action :move_to_index
   end
 
   private
+
   def order_params
-    params.require(:order_object).permit(:post_code, :prefecture_id, :city, :block, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:order_object).permit(:post_code, :prefecture_id, :city, :block, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: Item.find(order_params[:item_id]).price,
       card: order_params[:token],
@@ -36,12 +38,7 @@ before_action :move_to_index
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    if current_user.id != @item.user_id && @item.user_item
-      redirect_to root_path
-    end
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != @item.user_id && @item.user_item
+    redirect_to root_path if current_user.id == @item.user_id
   end
-
 end
