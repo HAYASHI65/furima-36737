@@ -13,12 +13,12 @@ class Item < ApplicationRecord
     validates :image
     validates :name
     validates :text
-    validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :status_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :fee_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :delivery_days_id, numericality: { other_than: 1, message: "can't be blank" }
-    validates :price, format: { with: /\A[0-9]+\z/, message: 'is invalid. Input half-width characters' }
+    validates :category_id, numericality: { other_than: 1, message: "を入力してください"}
+    validates :status_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :fee_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :prefecture_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :delivery_days_id, numericality: { other_than: 1, message: "を入力してください" }
+    validates :price, format: { with: /\A[0-9]+\z/, message: 'は半角数値で入力してください' }
   end
-  validates_inclusion_of :price, { in: 300..9_999_999, message: 'is out of setting range' }
+  validates_inclusion_of :price, { in: 300..9_999_999, message: 'は¥300〜9,999,999の間で設定してください' }
 end
