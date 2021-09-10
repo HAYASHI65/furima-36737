@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :move_to_index
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_object = OrderObject.new
   end
 
@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
       @order_object.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -40,5 +39,9 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
     redirect_to root_path if current_user.id != @item.user_id && @item.user_item
     redirect_to root_path if current_user.id == @item.user_id
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end

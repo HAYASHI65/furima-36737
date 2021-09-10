@@ -45,14 +45,14 @@ RSpec.describe OrderObject, type: :model do
         expect(@order_object.errors.full_messages).to include('Phone number is invalid. Input only number')
       end
       it 'tokenが空の場合、購入できない' do
-        @order_object.phone_number = ''
-        @order_object.valid?
-        expect(@order_object.errors.full_messages).to include('Phone number is invalid. Input only number')
-      end
-      it 'user_idが空の場合、購入できない' do
         @order_object.token = ''
         @order_object.valid?
         expect(@order_object.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空の場合、購入できない' do
+        @order_object.user_id = ''
+        @order_object.valid?
+        expect(@order_object.errors.full_messages).to include("User can't be blank")
       end
       it 'item_idが空の場合、購入できない' do
         @order_object.item_id = ''
